@@ -1,4 +1,4 @@
-package questao1.classes;
+package questao1;
 
 public class RacerRunnableInterface implements Runnable{
     private Thread thread;
