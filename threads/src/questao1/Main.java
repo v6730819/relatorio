@@ -10,18 +10,19 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Corrida");
 
-        List<RacerRunnableInterface> impares = new ArrayList<>();
+        List<Thread> impares = new ArrayList<>();
         List<RacerThreadClass> pares = new ArrayList<>();
 
         for (int i = 1; i <= VALOR_MAXIMO; i++) {
             if (i % 2 != 0) {
                 RacerRunnableInterface racer = new RacerRunnableInterface(String.valueOf(i), SLEEP_TIME);
+                Thread thread = new Thread(racer, String.valueOf(i));
                 if (i == 1) {
-                    racer.setPriority(Thread.MAX_PRIORITY);
+                    thread.setPriority(Thread.MAX_PRIORITY);
                 } else {
-                    racer.setPriority(Thread.NORM_PRIORITY);
+                    thread.setPriority(Thread.NORM_PRIORITY);
                 }
-                impares.add(racer);
+                impares.add(thread);
             } else {
                 RacerThreadClass racer = new RacerThreadClass(i, SLEEP_TIME);
                 if (i == 2) {
@@ -34,13 +35,13 @@ public class Main {
         }
 
         System.out.println("\n impares");
-        for (RacerRunnableInterface racer : impares) {
-            racer.start();
+        for (Thread thread : impares) {
+            thread.start();
         }
 
-        for (RacerRunnableInterface racer : impares) {
+        for (Thread thread : impares) {
             try {
-                racer.getThread().join();
+                thread.join();
             } catch (InterruptedException e) {
                 System.err.println("A execucao foi interrompida");
             }

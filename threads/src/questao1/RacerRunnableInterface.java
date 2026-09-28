@@ -1,7 +1,6 @@
 package questao1;
 
-public class RacerRunnableInterface implements Runnable{
-    private Thread thread;
+public class RacerRunnableInterface implements Runnable {
     private String id;
     private long sleepTime;
     private static final int REPETICOES = 1000;
@@ -13,7 +12,7 @@ public class RacerRunnableInterface implements Runnable{
 
     @Override
     public void run() {
-        for(int i = 1; i < REPETICOES; i++) {
+        for(int i = 1; i <= REPETICOES; i++) {
             System.out.println("Racer " + id + " - imprimindo (" + i + "/1000)");
             try {
                 Thread.sleep(sleepTime);
@@ -22,23 +21,5 @@ public class RacerRunnableInterface implements Runnable{
                 break;
             }
         }
-    }
-
-    public void start(){
-        if(thread == null) {
-            thread = new Thread(this, id);
-        }
-        thread.start();
-    }
-
-    public void setPriority(int priority) {
-        if (thread == null) {
-            thread = new Thread(this, id);
-        }
-        thread.setPriority(priority);
-    }
-
-    public Thread getThread() {
-        return thread;
     }
 }
